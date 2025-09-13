@@ -1,0 +1,115 @@
+feature,importance
+Disorder Subclass_Diabetes,0.22437886137259577
+Disorder Subclass_Cystic fibrosis,0.12173091320913967
+Disorder Subclass_Mitochondrial myopathy,0.10161918701503643
+Disorder Subclass_Leigh syndrome,0.09924611130947342
+Disorder Subclass_Tay-Sachs,0.09573331622125732
+Disorder Subclass_Hemochromatosis,0.03988025249436922
+Blood cell count (mcL),0.014782301883856612
+White Blood cell count (thousand per microliter),0.014044855022667516
+Disorder Subclass_Leber's hereditary optic neuropathy,0.013633612160170146
+Disorder Subclass_Alzheimer's,0.012978146202045881
+Patient Age,0.01212200664640337
+Mother's age,0.01211188975742138
+Father's age,0.012012261396049771
+Genes in mother's side_No,0.010505061076487243
+Genes in mother's side_Yes,0.010141489217308085
+No. of previous abortion,0.009659770323166587
+Disorder Subclass_Cancer,0.00872820690360572
+Inherited from father_Yes,0.008463681093324871
+Paternal gene_Yes,0.008374854507846191
+Maternal gene_No,0.008266468987247824
+Paternal gene_No,0.008070526965414538
+Inherited from father_No,0.007743212732831021
+Maternal gene_Yes,0.006688163497035756
+H/O radiation exposure (x-ray)_Not applicable,0.004912407379400362
+Birth asphyxia_Yes,0.0047516138175679005
+Gender_Ambiguous,0.004667529748954486
+Autopsy shows birth defect (if applicable)_Not applicable,0.00457824583635738
+Gender_Female,0.004561600898412214
+Blood test result_slightly abnormal,0.004469703402382692
+H/O radiation exposure (x-ray)_Yes,0.004399554838797342
+Birth asphyxia_No,0.004327203295823089
+History of anomalies in previous pregnancies_No,0.004212674025177546
+Blood test result_abnormal,0.0040755958552686836
+H/O substance abuse_No,0.0040386421235811265
+H/O radiation exposure (x-ray)_-,0.003934976547365947
+Blood test result_normal,0.0039005097087258865
+Folic acid details (peri-conceptional)_Yes,0.003897937969618439
+H/O radiation exposure (x-ray)_No,0.003871734553969826
+Blood test result_inconclusive,0.0038687971831533373
+Birth defects_Multiple,0.0037832561198506225
+Gender_Male,0.0037801416386027626
+Heart Rate (rates/min_Normal,0.0037443108757011672
+Folic acid details (peri-conceptional)_No,0.003743644811058509
+Assisted conception IVF/ART_No,0.003712471225160571
+Assisted conception IVF/ART_Yes,0.003678286635946396
+History of anomalies in previous pregnancies_Yes,0.003660440398814307
+Respiratory Rate (breaths/min)_Normal (30-60),0.0036368524804702563
+Respiratory Rate (breaths/min)_Tachypnea,0.0036310588604097937
+H/O substance abuse_Yes,0.0036257684214917557
+Birth defects_Singular,0.003615745488701454
+Heart Rate (rates/min_Tachycardia,0.0036055008658100072
+H/O serious maternal illness_No,0.0035928453615871343
+H/O substance abuse_Not applicable,0.0035768424019355376
+Birth asphyxia_Not available,0.0035516835462202794
+Birth asphyxia_No record,0.0035267064904922723
+H/O serious maternal illness_Yes,0.0035101051830582425
+H/O substance abuse_-,0.003315050782745117
+Autopsy shows birth defect (if applicable)_Yes,0.0027725028149410014
+Autopsy shows birth defect (if applicable)_No,0.0025529084176923035
+Wheezing,0.0
+Poor growth,0.0
+Cough,0.0
+Frequent lung infections,0.0
+Shortness of breath,0.0
+Fatigue,0.0
+Recurrent infections,0.0
+Eye pain,0.0
+Central vision defect,0.0
+Vision loss,0.0
+Memory problems,0.0
+Loss of libido,0.0
+Heart problems,0.0
+Skin bronzing,0.0
+Liver enlargement,0.0
+Abdominal pain,0.0
+Joint pain,0.0
+Increased hunger,0.0
+Poor coordination,0.0
+Weight loss,0.0
+Tingling/numbness,0.0
+Slow healing,0.0
+Blurred vision,0.0
+Frequent urination,0.0
+Excessive thirst,0.0
+High blood sugar,0.0
+Nasal polyps,0.0
+Clubbing of fingers,0.0
+Digestive problems,0.0
+Color vision problems,0.0
+Visual hallucinations,0.0
+Difficulty reading,0.0
+Loss of depth perception,0.0
+Difficulty swallowing,0.0
+Startle response,0.0
+Salty skin,0.0
+Cherry-red spot,0.0
+Loss of motor skills,0.0
+Neuropathy,0.0
+Tremors,0.0
+Gastrointestinal problems,0.0
+Exercise intolerance,0.0
+Eye movement abnormalities,0.0
+Lactic acidosis,0.0
+Movement disorders,0.0
+Hypotonia,0.0
+Poor feeding,0.0
+Breathing problems,0.0
+Seizures,0.0
+Vomiting,0.0
+Muscle weakness,0.0
+Developmental delay,0.0
+Headaches,0.0
+Optic disc swelling,0.0
+Muscle stiffness,0.0

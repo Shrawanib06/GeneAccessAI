@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}GeneAccess AI{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <a href="/">GeneAccess AI</a>
+      </div>
+      <div class="nav-menu">
+        {% if user %}
+          <a href="/" class="nav-link">Home</a>
+          <a href="/report" class="nav-link">Report</a>
+          <a href="/user" class="nav-link">User</a>
+          <a href="/logout" class="nav-link logout-btn">Logout</a>
+        {% else %}
+          <a href="/login" class="nav-link login-btn">Login</a>
+          <a href="/signup" class="nav-link signup-btn">Sign Up</a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+  <div class="main-content">
+    {% block content %}{% endblock %}
+  </div>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h4>GeneAccess AI</h4>
+        <p>Your intelligent companion for genetic information and analysis. Empowering users with AI-driven insights into genetic conditions and diseases.</p>
+        <div class="social-links">
+          <a href="#" class="social-link">Twitter</a>
+          <a href="#" class="social-link">LinkedIn</a>
+          <a href="#" class="social-link">GitHub</a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="/">Home</a></li>
+          {% if user %}
+          <li><a href="/report">My Reports</a></li>
+          <li><a href="/user">Profile</a></li>
+          {% endif %}
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Features</h4>
+        <ul class="footer-links">
+          <li>AI Chatbot</li>
+          <li>Genetic Analysis</li>
+          <li>Report Generation</li>
+          <li>User Dashboard</li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Contact</h4>
+        <ul class="footer-links">
+          <li>Email: info@geneaccess.ai</li>
+          <li>Support: support@geneaccess.ai</li>
+          <li>Phone: +1 (555) 123-4567</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <p>&copy; 2024 GeneAccess AI. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html> 

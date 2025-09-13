@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeneAccess AI</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  {% if not user %}
+  <style>
+    body {
+      background: url('{{ url_for('static', filename='background.png') }}') no-repeat center center fixed !important;
+      background-size: cover !important;
+    }
+
+    .main-content,
+    .navbar,
+    .footer,
+    .footer-container,
+    .footer-bottom {
+      position: relative;
+      z-index: 2;
+    }
+
+    .main-content {
+      min-height: 80vh;
+      padding-bottom: 2rem;
+    }
+
+    /* Navigation Bar with new colors */
+
+
+    .nav-link {
+      color: #b5b1b1;
+      transition: color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: #667eea;
+    }
+
+    .login-btn,
+    .signup-btn {
+      /* background: #9D8DF1; */
+      background: #806ce9;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+    }
+
+    /* .login-btn:hover,
+    .signup-btn:hover {
+      background: #667eea;
+      color: white;
+    } */
+
+    .login-btn::before,
+    .signup-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .login-btn:hover::before,
+    .signup-btn:hover::before {
+      left: 100%;
+    }
+
+    .login-btn:hover,
+    .signup-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .logout-btn {
+      background: #F28B82;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+    }
+
+    .logout-btn:hover {
+      background: #d17a72;
+      color: white;
+    }
+
+    /* Chat with AI Button Styles */
+    .chat-button-container {
+      text-align: left;
+      margin: 2rem 0;
+    }
+
+    .chat-with-ai-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .chat-with-ai-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(48, 52, 66, 0.6);
+      color: white;
+      text-decoration: none;
+    }
+
+    .chat-with-ai-btn:active {
+      transform: translateY(0);
+    }
+
+    .chat-icon {
+      font-size: 1.3rem;
+    }
+
+    .login-note {
+      font-size: 0.8rem;
+      opacity: 0.8;
+      font-weight: 400;
+    }
+
+    /* Hero Features in one line */
+    .hero-features {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      margin: 2rem 0 2rem 0;
+      flex-wrap: wrap;
+      /* border-top: 2px solid rgba(255, 255, 255, 0.3); */
+      /* padding-top: 3rem; */
+    }
+
+    .hero-feature {
+      text-align: center;
+      flex: 1;
+      min-width: 240px;
+      max-width: 340px;
+      width: 340px;
+      height: 180px;
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Separate Containers */
+    .welcome-container {
+      margin-top: 62px;
+      margin-left: 132px;
+      margin-bottom: 3rem;
+      text-align: left;
+      max-width: 600px;
+    }
+
+    .features-container {
+      margin-left: 132px;
+    }
+
+    .welcome-container h1 {
+      letter-spacing: 2px;
+      font-size: 64px;
+      margin-bottom: 1rem;
+      color: #514b4b;
+    }
+
+    .welcome-container p {
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+      color: #796b6b;
+    }
+
+    /* Hero Features with new colors */
+    .hero-feature h3 {
+      color: #667eea;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-feature p {
+      color: #b5b1b1;
+    }
+
+    /* Feature Cards for logged-in users */
+    .feature-card {
+      background: #667eea;
+      padding: 2rem;
+      border-radius: 15px;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0, 124, 145, 0.1);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 124, 145, 0.15);
+    }
+
+    .feature-card h3 {
+      color: #667eea;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card p {
+      color: #b5b1b1;
+      margin-bottom: 1.5rem;
+    }
+
+    .feature-btn {
+      background: #9D8DF1;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .feature-btn:hover {
+      background: #667eea;
+      color: white;
+      text-decoration: none;
+      transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+      background: #1b1d1e;
+    }
+
+    #message-input::placeholder {
+      color: #b5b1b1;
+      opacity: 1;
+      font-size: 1.08rem;
+    }
+
+    /* Chatbot message alignment and bubbles */
+    .chat-messages {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .message {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .message.user {
+      justify-content: flex-end;
+    }
+
+    .message.bot {
+      justify-content: flex-start;
+    }
+
+    .message-content {
+      max-width: 70%;
+      padding: 14px 20px;
+      border-radius: 18px;
+      word-wrap: break-word;
+      line-height: 1.5;
+      font-size: 1.08rem;
+    }
+
+    .message.user .message-content {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #fff;
+      border-bottom-right-radius: 6px;
+      border-bottom-left-radius: 18px;
+      margin-left: auto;
+      text-align: right;
+    }
+
+    .message.bot .message-content {
+      background: #232323;
+      color: #e7e6e6;
+      border: 1px solid #444;
+      border-bottom-left-radius: 6px;
+      border-bottom-right-radius: 18px;
+      margin-right: auto;
+      text-align: left;
+    }
+  </style>
+  {% endif %}
+</head>
+
+<body>
+  {% if not user %}
+  <!-- <div class="glass-left-half"></div> -->
+  <style>
+    .main-content {
+      margin: 0 !important;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+    }
+  </style>
+  {% endif %}
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <!-- {% if not user %}
+    <div class="glass-left-half" style="height: 100%; width: 50vw; top: 0; left: 0; position: absolute;"></div>
+    {% endif %} -->
+    <div class="nav-container">
+      <div class="nav-logo">
+        <a href="/">GeneAccess AI</a>
+      </div>
+
+      <div class="nav-menu">
+        <!-- <a href="/" class="nav-link">Home</a> -->
+
+        {% if user %}
+        <a href="/" class="nav-link">Home</a>
+        <a href="/report" class="nav-link">Report</a>
+        <a href="/user" class="nav-link">User</a>
+        <a href="/logout" class="nav-link logout-btn">Logout</a>
+        {% else %}
+        <a href="/login" class="nav-link login-btn">Login</a>
+        <a href="/signup" class="nav-link signup-btn">Sign Up</a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    {% if user %}
+    <!-- Logged in user content -->
+    <!-- Welcome Container -->
+    <div class="welcome-container">
+      <h1>Welcome back, {{ user.name or user.email }}!</h1>
+    </div>
+    <!-- Enhanced Chatbot Interface for logged-in users -->
+    {% include 'chatbot.html' %}
+    {% else %}
+    <!-- Guest user content -->
+    <!-- Welcome Container -->
+    <div class="welcome-container">
+      <h1>Welcome to GeneAccess AI</h1>
+      <p>Your intelligent companion for genetic information and analysis</p>
+      <!-- Chat with AI Button -->
+      <div class="chat-button-container">
+        <a href="/login" class="chat-with-ai-btn">
+          Chat with AI
+        </a>
+      </div>
+    </div>
+
+    <!-- Features Container -->
+    <div class="features-container">
+      <div class="hero-features">
+        <div class="hero-feature">
+          <h3>AI-Powered Analysis</h3>
+          <p>Advanced genetic analysis powered by artificial intelligence</p>
+        </div>
+        <div class="hero-feature">
+          <h3>Interactive Chatbot</h3>
+          <p>Get instant answers about genetic conditions and diseases</p>
+        </div>
+        <div class="hero-feature">
+          <h3>Detailed Reports</h3>
+          <p>Generate comprehensive reports on genetic conditions</p>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h4>GeneAccess AI</h4>
+        <p>Your intelligent companion for genetic information and analysis. Empowering users with AI-driven insights
+          into genetic conditions and diseases.</p>
+        <div class="social-links">
+          <a href="#" class="social-link">Twitter</a>
+          <a href="#" class="social-link">LinkedIn</a>
+          <a href="#" class="social-link">GitHub</a>
+        </div>
+      </div>
+
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="/">Home</a></li>
+          {% if user %}
+          <li><a href="/report">My Reports</a></li>
+          <li><a href="/user">Profile</a></li>
+          {% endif %}
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Features</h4>
+        <ul class="footer-links">
+          <li>AI Chatbot</li>
+          <li>Genetic Analysis</li>
+          <li>Report Generation</li>
+          <li>User Dashboard</li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h4>Contact</h4>
+        <ul class="footer-links">
+          <li>Email: info@geneaccess.ai</li>
+          <li>Support: support@geneaccess.ai</li>
+          <li>Phone: +1 (555) 123-4567</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <p>&copy; 2024 GeneAccess AI. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+
+  <!-- Back to Top Button -->
+  <a href="#" class="back-to-top" id="back-to-top">↑</a>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>

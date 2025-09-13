@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - GeneAccess AI</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/script.js" defer></script>
+    <style>
+      body {
+        background: #1b1c1c;
+        color: #e7e6e6;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        min-height: 100vh;
+      }
+      .signup-container {
+        background: #232323;
+        border-radius: 18px;
+        box-shadow: 0 4px 24px rgb(0 0 0);
+        padding: 2.5rem 2rem;
+        max-width: 400px;
+        margin: 3rem auto 2rem auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .signup-container h2 {
+        color: #e7e6e6;
+        margin-bottom: 1.5rem;
+      }
+      .form-group label {
+        color: #b5b1b1;
+      }
+      .signup-form input {
+        width: 100%;
+        padding: 0.75rem;
+        border-radius: 10px;
+        border: 2px solid #333;
+        background: #1b1c1c;
+        color: #e7e6e6;
+        margin-bottom: 1.2rem;
+        font-size: 1rem;
+      }
+      .signup-form input:focus {
+        border-color: #667eea;
+        outline: none;
+      }
+      .signup-submit-btn {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #fff;
+        border: none;
+        border-radius: 25px;
+        padding: 0.75rem 2rem;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+        margin-top: 0.5rem;
+      }
+      .signup-submit-btn:hover {
+        background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        transform: translateY(-2px);
+      }
+      .form-footer p, .form-footer a {
+        color: #b5b1b1;
+      }
+      .form-footer a:hover {
+        color: #667eea;
+      }
+      .msg {
+        background: #9BE7C4;
+        color: #232323;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        margin-bottom: 1rem;
+      }
+      .error {
+        background: #f87171;
+        color: #fff;
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        margin-bottom: 1rem;
+      }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/">GeneAccess AI</a>
+            </div>
+            <div class="nav-menu">
+                {% if user %}
+                  <a href="/" class="nav-link">Home</a>
+                  <a href="/report" class="nav-link">Report</a>
+                  <a href="/user" class="nav-link">User</a>
+                  <a href="/logout" class="nav-link logout-btn">Logout</a>
+                {% else %}
+                  <a href="/login" class="nav-link login-btn">Login</a>
+                  <a href="/signup" class="nav-link signup-btn">Sign Up</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+    <div class="signup-container">
+        <h2>Create Your Account</h2>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <p class="{{ 'msg' if category == 'success' else 'error' }}">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+        <form action="/signup" method="POST" class="signup-form">
+                <div class="form-group">
+                    <label for="signup_username">Username:</label>
+                    <input type="text" id="signup_username" name="signup_username" required>
+                </div>
+                
+                <div class="form-group">
+            <label for="signup_email">Email:</label>
+            <input type="email" id="signup_email" name="signup_email" required>
+                </div>
+
+                <div class="form-group">
+            <label for="signup_password">Password:</label>
+            <input type="password" id="signup_password" name="signup_password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="signup_confirm_password">Confirm Password:</label>
+                    <input type="password" id="signup_confirm_password" name="signup_confirm_password" required>
+                </div>
+
+                <button type="submit" class="signup-submit-btn">Sign Up</button>
+        </form>
+            
+            <div class="form-footer">
+                <p>Already have an account? <a href="/login">Login here</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h4>GeneAccess AI</h4>
+                <p>Your intelligent companion for genetic information and analysis.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>&copy; 2024 GeneAccess AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

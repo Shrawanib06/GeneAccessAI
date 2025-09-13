@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="main-content"
+  style="background:#232323; border-radius: 16px; box-shadow: 0 8px 32px rgb(0 0 0 / 69%); padding: 2rem; margin: 2rem auto; max-width: 800px; color: #e7e6e6;">
+  <div class="user-profile-container" style="padding: 0;">
+    <h2 style="color:#667eea;">Welcome, {{ user.name or user.email }}</h2>
+    <div class="user-info" style="border: none;">
+      <p><strong>User ID:</strong> {{ user.id }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Member Since:</strong> {{ user.created_at.strftime('%B %Y') }}</p>
+      <p><strong>Account Status:</strong> <span class="status {{ user.status|lower }}">{{ user.status }}</span></p>
+    </div>
+    <div class="activity-summary" style="border: none;">
+      <h3 style="color:#667eea;">Activity Summary</h3>
+      <ul style="border: none; padding: 0; display: flex; gap: 2rem; list-style: none;">
+        <li style="border: none;font-size: 1.1rem; text-align: center; color: #e7e6e6;">
+          <strong>{{ report_count }}</strong> Reports Generated
+        </li>
+        <!-- <li style="border: none; padding: 1rem 1.5rem; font-size: 1.1rem; text-align: center; color: #e7e6e6;">
+          <strong>{{ chat_count }}</strong> Chat Sessions
+        </li>
+        <li style="border: none; padding: 1rem 1.5rem; font-size: 1.1rem; text-align: center; color: #e7e6e6;">
+          <strong>{{ query_count }}</strong> Queries Made
+        </li> -->
+      </ul>
+    </div>
+    <!-- <div class="recent-activity" style="border: none;">
+      <h3 style="color:#667eea;">Recent Activity</h3>
+      {% if recent_activity %}
+        <ul>
+          {% for activity in recent_activity %}
+            <li>{{ activity }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No recent activity. Start using GeneAccess AI to see your activity here!</p>
+      {% endif %}
+    </div> -->
+
+
+
+
+    <!-- <div class="account-actions" style="border: none;">
+      <button onclick="location.href='/update_profile'">Update Profile</button>
+      <button onclick="if(confirm('Are you sure you want to delete your account?')) location.href='/delete_account'">Delete Account</button>
+    </div> -->
+
+    <div class="account-actions" style="border: none; display: flex; gap: 1rem;">
+      <!-- Update Profile -->
+      <form action="{{ url_for('update_profile') }}" method="get" style="margin: 0;">
+        <button type="submit" class="update-btn">Update Profile</button>
+      </form>
+
+      <!-- Delete Account -->
+      <form action="{{ url_for('delete_account') }}" method="post"
+        onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.')"
+        style="margin: 0;">
+        <button type="submit" class="delete-btn">Delete Account</button>
+      </form>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
