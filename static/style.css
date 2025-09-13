@@ -664,7 +664,7 @@ html {
     font-weight: 700;
     text-decoration: none;
     display: inline-block;
-    background: linear-gradient(90deg, #ff7e5f, #feb47b); /* Gradient colors */
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
     -webkit-background-clip: text;  /* Clip the gradient to text */
     -webkit-text-fill-color: transparent; /* Make text fill transparent so gradient shows */
     background-clip: text; /* For other browsers that support it */
@@ -1130,7 +1130,7 @@ form input {
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, #ff7e5f, #feb47b); /* explicit gradient */
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
     transition: width 0.3s ease;
 }
 
