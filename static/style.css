@@ -1061,14 +1061,21 @@ form input {
 }
 
 .footer-section h4 {
-    color: var(--primary-color);
-    margin-bottom: 1.5rem;
     font-size: 1.3rem;
     font-weight: 700;
-    background: var(--gradient-primary);
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    background: linear-gradient(90deg, #ff7e5f, #feb47b); /* Gradient colors */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    cursor: default;
+}
+
+.footer-section h4:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
 }
 
 .footer-section p {
@@ -1123,7 +1130,7 @@ form input {
     left: 0;
     width: 0;
     height: 2px;
-    background: var(--gradient-primary);
+    background: linear-gradient(90deg, #ff7e5f, #feb47b); /* explicit gradient */
     transition: width 0.3s ease;
 }
 
