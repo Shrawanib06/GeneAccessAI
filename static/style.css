@@ -660,21 +660,23 @@ html {
 }
 
 .nav-logo a {
-    color: white;
-    text-decoration: none;
     font-size: 1.8rem;
     font-weight: 700;
-    outline: none;
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    background: linear-gradient(90deg, #ff7e5f, #feb47b); /* Gradient colors */
+    -webkit-background-clip: text;  /* Clip the gradient to text */
+    -webkit-text-fill-color: transparent; /* Make text fill transparent so gradient shows */
+    background-clip: text; /* For other browsers that support it */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    cursor: pointer;
 }
 
 .nav-logo a:hover {
     transform: scale(1.05);
+    opacity: 0.9;
 }
+
 
 .nav-menu {
     display: flex;
