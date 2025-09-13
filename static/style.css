@@ -1385,7 +1385,7 @@ form input {
     font-size: 2rem;
     font-weight: 800;
     display: inline-block;
-    background: linear-gradient(90deg, #ff7e5f, #feb47b); /* explicit gradient */
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
