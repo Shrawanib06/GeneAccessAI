@@ -28,6 +28,40 @@
     }
 
     /* Navigation Bar with new colors */
+    /* Navbar styles */
+.navbar {
+  position: fixed;       /* stays on top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.9); /* light background so text is visible */
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: center;
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Container to space logo and menu */
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Logo styling */
+.nav-logo a {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;  /* darker so it’s visible */
+  text-decoration: none;
+}
+
+.nav-logo a:hover {
+  color: #667eea; /* matches your theme */
+}
 
 
     .nav-link {
