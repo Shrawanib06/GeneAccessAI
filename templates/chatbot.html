@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeneAccess AI Chatbot</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+  <div class="chatbot-container">
+    <h1>GeneAccess AI Chatbot</h1>
+    <div class="chat-messages" id="chat-messages"></div>
+    <form id="chat-form" class="chat-input">
+      <input type="text" id="message-input" placeholder="Ask your question..." autocomplete="off">
+      <button type="submit">Send</button>
+    </form>
+  </div>
+  <script>
+    const chatBox = document.getElementById("chat-messages");
+    const chatForm = document.getElementById("chat-form");
+    const inputField = document.getElementById("message-input");
+
+    async function sendMessage(message) {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message })
+      });
+      return res.json();
+    }
+
+    function addBotMessage(content) {
+      const msg = document.createElement("div");
+      msg.className = "message bot-message";
+      const bubble = document.createElement("div");
+      bubble.className = "message-content";
+
+      // --- Handle plain string responses ---
+      if (typeof content === "string") {
+        bubble.innerHTML = content;
+      }
+
+      // --- Handle symptom selection step ---
+      else if (content.type === "symptom_selection") {
+        bubble.innerHTML = `<p>${content.message}</p>`;
+        content.options.forEach((symptom, idx) => {
+          const label = document.createElement("label");
+          label.style.display = "flex";
+          label.style.alignItems = "center";
+          label.style.margin = "6px 0";
+          label.style.padding = "8px 12px";
+          label.style.borderRadius = "8px";
+          label.style.cursor = "pointer";
+          label.style.transition = "0.3s ease";
+
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.value = idx + 1;
+          checkbox.style.accentColor = "var(--primary-color)";
+          checkbox.style.marginRight = "10px";
+          checkbox.style.width = "20px";
+          checkbox.style.height = "20px";
+
+          label.appendChild(checkbox);
+          label.appendChild(document.createTextNode(symptom));
+          bubble.appendChild(label);
+        });
+
+        // ✅ Submit button for symptoms
+        const btn = document.createElement("button");
+        btn.innerText = "Submit";
+        btn.style.background = "linear-gradient(90deg, #667eea 0%, #764ba2 100%)";
+        btn.style.color = "#fff";
+        btn.style.border = "none";
+        btn.style.padding = "10px 20px";
+        btn.style.borderRadius = "25px";
+        btn.style.cursor = "pointer";
+        btn.style.fontWeight = "600";
+        btn.style.marginTop = "15px";
+        btn.onclick = () => {
+          const selected = [...bubble.querySelectorAll("input:checked")].map(cb => cb.value);
+          inputField.value = selected.join(",");
+          chatForm.dispatchEvent(new Event("submit"));
+        };
+        bubble.appendChild(btn);
+      }
+
+      // --- Handle waiting message ---
+      else if (content.type === "wait_and_predict") {
+        bubble.innerHTML = content.message;
+
+        // After 2s, auto trigger backend to get final result
+        setTimeout(async () => {
+          const res = await sendMessage("__auto__"); // dummy input
+          if (res.response) addBotMessage(res.response);
+        }, 2000);
+      }
+
+      // --- Handle final prediction result ---
+      else if (content.type === "final_result") {
+        bubble.innerHTML = content.message;
+      }
+
+      msg.appendChild(bubble);
+      chatBox.appendChild(msg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    chatForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const message = inputField.value.trim();
+      if (!message) return;
+
+      // Show user message
+      const userMsg = document.createElement("div");
+      userMsg.className = "message user-message";
+      const bubble = document.createElement("div");
+      bubble.className = "message-content";
+      bubble.innerText = message;
+      userMsg.appendChild(bubble);
+      chatBox.appendChild(userMsg);
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      inputField.value = "";
+
+      const data = await sendMessage(message);
+
+      if (data.response) {
+        if (Array.isArray(data.response)) {
+          data.response.forEach((msg, i) => {
+            setTimeout(() => addBotMessage(msg), i * 2000);
+          });
+        } else {
+          addBotMessage(data.response);
+        }
+      }
+    });
+
+    // Show welcome message at start
+    window.addEventListener("DOMContentLoaded", () => {
+      addBotMessage(
+        "Welcome to GeneAccessAI. I'm Dr. GeneAccess. Let's begin. What's your full name?"
+      );
+    });
+  </script>
+
+</body>
+
+</html>
