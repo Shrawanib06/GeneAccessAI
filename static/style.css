@@ -1381,15 +1381,23 @@ form input {
 
 .login-container h2,
 .signup-container h2 {
-    color: var(--text-white);
     margin-bottom: 2rem;
     font-size: 2rem;
     font-weight: 800;
-    background: var(--gradient-primary);
+    display: inline-block;
+    background: linear-gradient(90deg, #ff7e5f, #feb47b); /* explicit gradient */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    transition: transform 0.3s ease, opacity 0.3s ease;
 }
+
+.login-container h2:hover,
+.signup-container h2:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
 
 .login-form,
 .signup-form {
