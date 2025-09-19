@@ -335,7 +335,7 @@ DISORDER_INFO = {
             "Adopt stress-reduction practices like yoga, meditation, or mindfulness."
         ],
     },
-    "Single-gene inheritance disease": {
+    "Single-gene inheritance diseases": {
         "explanation": (
             "Single-gene inheritance diseases are caused by mutations in a single gene. "
             "These can be inherited in dominant, recessive, or X-linked patterns. Examples include cystic fibrosis, "
